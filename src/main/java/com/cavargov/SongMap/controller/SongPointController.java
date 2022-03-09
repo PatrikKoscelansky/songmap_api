@@ -1,12 +1,13 @@
 package com.cavargov.SongMap.controller;
 
 import com.cavargov.SongMap.model.dto.SongDto;
+import com.cavargov.SongMap.model.dto.SongPointCreateDto;
 import com.cavargov.SongMap.model.dto.SongPointRespDto;
+import com.cavargov.SongMap.model.security.JwtAuthentication;
 import org.joda.time.DateTime;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -36,6 +37,14 @@ public class SongPointController {
         ));
 
         return songPoints;
+    }
+
+    @PostMapping(path = "/users/me/songpoints/")
+    public List<SongPointRespDto> createSongPointsForUser(@RequestBody List<SongPointCreateDto> songPoints){
+        JwtAuthentication authentication = (JwtAuthentication) SecurityContextHolder.getContext().getAuthentication();
+        String subject = authentication.getJwtClaimsSet().getSubject();
+        System.out.println(subject);
+        return List.of();
     }
 
 }

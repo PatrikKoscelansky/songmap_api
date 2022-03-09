@@ -48,6 +48,11 @@ public class AwsCognitoIdTokenProcessor {
         return claims.getClaims().get(this.jwtConfiguration.getUserNameField()).toString();
     }
 
+    private String getSubFrom(JWTClaimsSet claims){
+        System.out.println(claims);
+        return claims.getClaims().get(this.jwtConfiguration.getSubField()).toString();
+    }
+
     private void verifyIfIdToken(JWTClaimsSet claims) throws Exception {
         if (!claims.getIssuer().equals(this.jwtConfiguration.getCognitoIdentityPoolUrl())) {
             throw new Exception("JWT Token is not an ID Token");

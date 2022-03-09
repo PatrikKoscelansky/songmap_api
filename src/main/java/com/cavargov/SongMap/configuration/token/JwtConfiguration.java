@@ -13,6 +13,7 @@ public class JwtConfiguration {
     @Value(value = "${aws.cognito.region}")
     private String region;
     private String userNameField = "username";
+    private String subField = "sub";
     private int connectionTimeout = 2000;
     private int readTimeout = 2000;
     private String httpHeader = "Authorization";
@@ -58,6 +59,10 @@ public class JwtConfiguration {
 
     public String getUserNameField() {
         return userNameField;
+    }
+
+    public String getSubField(){
+        return subField;
     }
 
     public void setUserNameField(String userNameField) {
